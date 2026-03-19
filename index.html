@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>참한우 – 우리끼리 좋은고기</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #1a1210;
+  --bg-card: #231c18;
+  --bg-warm: #2a2019;
+  --accent: #c8956c;
+  --accent-light: #e8b88a;
+  --accent-glow: #d4a07440;
+  --gold: #d4a574;
+  --cream: #f5ece3;
+  --cream-dim: #c4b5a5;
+  --white: #faf6f1;
+  --text: #e8ddd2;
+  --text-dim: #9a8b7a;
+  --red: #c45c4a;
+  --red-soft: #d4725f;
+  --green: #7a9e6d;
+  --spring-pink: #e8a0b0;
+  --spring-bg: #2a1e20;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, #3a251a 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 20% 80%, #2a1a12 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 80% 20%, #2a1a12 0%, transparent 60%);
+  z-index: 0;
+}
+
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1.2s ease-out;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.4rem 1.2rem;
+  border-radius: 2rem;
+  margin-bottom: 2rem;
+  animation: fadeUp 1s ease-out 0.2s both;
+}
+
+.hero h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  animation: fadeUp 1s ease-out 0.4s both;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+  color: var(--text-dim);
+  font-weight: 300;
+  margin-bottom: 3rem;
+  animation: fadeUp 1s ease-out 0.6s both;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  color: var(--bg-deep);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 1rem 2.5rem;
+  border-radius: 3rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  animation: fadeUp 1s ease-out 0.8s both;
+  box-shadow: 0 8px 32px var(--accent-glow);
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px var(--accent-glow);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: bounce 2s infinite 2s;
+}
+
+.scroll-hint span {
+  display: block;
+  width: 24px;
+  height: 38px;
+  border: 2px solid var(--text-dim);
+  border-radius: 12px;
+  position: relative;
+}
+
+.scroll-hint span::after {
+  content: '';
+  width: 4px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollDot 2s infinite;
+}
+
+/* ── NAVIGATION TABS ── */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(26, 18, 16, 0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(200, 149, 108, 0.15);
+  padding: 0 1rem;
+}
+
+.nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+  flex-shrink: 0;
+  padding: 1rem 1.3rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav-tab:hover, .nav-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ── SECTIONS ── */
+section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+
+.section-desc {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+}
+
+/* ── CATEGORY CARDS ── */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.cat-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(200, 149, 108, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+.cat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(200, 149, 108, 0.3);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+}
+
+.cat-header {
+  padding: 1.5rem 1.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.cat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.cat-icon.grill { background: linear-gradient(135deg, #c45c4a33, #d4725f22); }
+.cat-icon.stew { background: linear-gradient(135deg, #7a9e6d33, #8ab87a22); }
+.cat-icon.special { background: linear-gradient(135deg, #c8956c33, #e8b88a22); }
+.cat-icon.service { background: linear-gradient(135deg, #8a7ac833, #a090e822); }
+
+.cat-name {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--cream);
+}
+
+.cat-sub {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.cat-items {
+  padding: 0 1.5rem 1.5rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.cat-card.open .cat-items {
+  max-height: 1200px;
+}
+
+.cat-toggle {
+  padding: 0 1.5rem 1rem;
+  font-size: 0.75rem;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.cat-toggle .arrow {
+  transition: transform 0.3s;
+  display: inline-block;
+}
+
+.cat-card.open .cat-toggle .arrow {
+  transform: rotate(180deg);
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(200,149,108,0.06);
+}
+
+.item-row:last-child { border: none; }
+
+.item-name {
+  font-size: 0.9rem;
+  color: var(--text);
+  flex: 1;
+}
+
+.item-grade {
+  font-size: 0.65rem;
+  color: var(--accent);
+  background: rgba(200,149,108,0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 1rem;
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+}
+
+.item-price {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  color: var(--cream);
+  font-size: 0.95rem;
+  margin-left: 1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.item-note {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  padding: 0.2rem 0 0.5rem;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(200,149,108,0.06);
+}
+
+/* ── SPRING SALE ── */
+#spring-sale {
+  background: linear-gradient(180deg, var(--spring-bg), var(--bg-deep));
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  margin: 2rem auto;
+  border: 1px solid rgba(232, 160, 176, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+#spring-sale::before {
+  content: '🌸';
+  position: absolute;
+  font-size: 8rem;
+  top: -2rem;
+  right: -1rem;
+  opacity: 0.07;
+}
+
+.sale-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--spring-pink), #d48a9a);
+  color: var(--bg-deep);
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.35rem 1rem;
+  border-radius: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.sale-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.sale-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(232,160,176,0.12);
+  border-radius: 14px;
+  padding: 1.3rem;
+  transition: all 0.3s;
+}
+
+.sale-card:hover {
+  border-color: rgba(232,160,176,0.3);
+  background: rgba(255,255,255,0.06);
+}
+
+.sale-card-label {
+  font-size: 0.7rem;
+  color: var(--spring-pink);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+
+.sale-card-name {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--cream);
+  margin-bottom: 0.6rem;
+}
+
+.sale-card-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--spring-pink);
+}
+
+.sale-card-price small {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+.sale-card-unit {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 0.2rem;
+}
+
+.sale-card-stock {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.7rem;
+  color: var(--red-soft);
+  background: rgba(196,92,74,0.12);
+  padding: 0.2rem 0.6rem;
+  border-radius: 1rem;
+}
+
+.sale-card-tip {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* ── ORDER INFO ── */
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.2rem;
+}
+
+.info-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(200,149,108,0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.info-card h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-line {
+  font-size: 0.85rem;
+  color: var(--text);
+  padding: 0.4rem 0;
+  line-height: 1.6;
+}
+
+.info-line strong {
+  color: var(--cream);
+}
+
+.info-highlight {
+  background: rgba(200,149,108,0.08);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ── ORDER FORM ── */
+.order-form-box {
+  background: var(--bg-card);
+  border: 1px solid rgba(200,149,108,0.15);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.order-form-box h3 {
+  font-family: 'Noto Serif KR', serif;
+  color: var(--cream);
+  font-size: 1.15rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  align-items: baseline;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(200,149,108,0.06);
+  font-size: 0.85rem;
+}
+
+.form-label {
+  width: 110px;
+  flex-shrink: 0;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.form-example {
+  color: var(--text-dim);
+}
+
+.order-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #fee500, #ffcd00);
+  color: #3c1e1e;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.9rem 2rem;
+  border-radius: 3rem;
+  text-decoration: none;
+  margin-top: 1.5rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(254, 229, 0, 0.15);
+}
+
+.order-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(254, 229, 0, 0.25);
+}
+
+/* ── FOOTER ── */
+.footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  border-top: 1px solid rgba(200,149,108,0.1);
+  text-align: center;
+}
+
+.footer-brand {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.1rem;
+  color: var(--cream);
+  margin-bottom: 0.8rem;
+}
+
+.footer-info {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(200,149,108,0.2);
+  border-radius: 2rem;
+  transition: all 0.3s;
+}
+
+.footer-link:hover {
+  background: rgba(200,149,108,0.1);
+}
+
+/* ── PACKAGING SECTION ── */
+.pack-options {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.pack-chip {
+  background: rgba(200,149,108,0.08);
+  border: 1px solid rgba(200,149,108,0.15);
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  flex: 1;
+  min-width: 180px;
+}
+
+.pack-chip h4 {
+  font-size: 0.85rem;
+  color: var(--cream);
+  margin-bottom: 0.3rem;
+}
+
+.pack-chip p {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+@keyframes scrollDot {
+  0% { opacity: 1; top: 6px; }
+  100% { opacity: 0; top: 18px; }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  section { padding: 3rem 1rem; }
+  .category-grid, .sale-grid, .info-cards { grid-template-columns: 1fr; }
+  .form-row { flex-direction: column; gap: 0.2rem; }
+  .form-label { width: auto; }
+  #spring-sale { padding: 2rem 1.2rem; margin: 1rem; border-radius: 16px; }
+  .order-form-box { padding: 1.5rem; }
+  .nav-tab { padding: 0.9rem 1rem; font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Since Trust · HACCP 인증</div>
+    <h1><span>참</span>한우</h1>
+    <p class="hero-sub">우리끼리 좋은고기, 합리적 가격의 바른먹거리</p>
+    <span class="hero-cta" data-target="menu" style="cursor:pointer">메뉴 보러가기 ↓</span>
+  </div>
+  <div class="scroll-hint"><span></span></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <span class="nav-tab active" data-target="menu">품목 · 가격</span>
+    <span class="nav-tab" data-target="spring-sale">🌸 봄 세일</span>
+    <span class="nav-tab" data-target="order">주문 안내</span>
+    <span class="nav-tab" data-target="payment">결제 · 배송</span>
+  </div>
+</nav>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="fade-in">
+    <p class="section-label">Menu & Price</p>
+    <h2 class="section-title">한우 품목별 단가</h2>
+    <p class="section-desc">100g 기준 · 지정표시 외 1+등급 이상 출고<br>재고에 따라 상향등급 랜덤발송 될 수 있습니다</p>
+  </div>
+
+  <div class="category-grid">
+
+    <!-- 구이류 -->
+    <div class="cat-card open" onclick="this.classList.toggle('open')">
+      <div class="cat-header">
+        <div class="cat-icon grill">🥩</div>
+        <div>
+          <div class="cat-name">구이류</div>
+          <div class="cat-sub">프리미엄 구이 부위</div>
+        </div>
+      </div>
+      <div class="cat-toggle">상세보기 <span class="arrow">▼</span></div>
+      <div class="cat-items">
+        <div class="item-row">
+          <span class="item-name">꽃갈비살</span>
+          <span class="item-grade">1++</span>
+          <span class="item-price">15,000원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">살치살</span>
+          <span class="item-grade">1++</span>
+          <span class="item-price">15,000원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">갈비살 모듬</span>
+          <span class="item-grade">꽃3:늑간7</span>
+          <span class="item-price">10,500원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">갈비살 (늑간살)</span>
+          <span class="item-grade"></span>
+          <span class="item-price">9,000원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">윗등심</span>
+          <span class="item-grade"></span>
+          <span class="item-price">8,500원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">꽃등심 (아랫채)</span>
+          <span class="item-grade"></span>
+          <span class="item-price">10,500원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">안심</span>
+          <span class="item-grade"></span>
+          <span class="item-price">11,500원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">치마살</span>
+          <span class="item-grade"></span>
+          <span class="item-price">12,000원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">채끝</span>
+          <span class="item-grade"></span>
+          <span class="item-price">10,000원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">부채살</span>
+          <span class="item-grade"></span>
+          <span class="item-price">9,500원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">업진살</span>
+          <span class="item-grade"></span>
+          <span class="item-price">9,500원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">통안창살</span>
+          <span class="item-grade">0.5~1.5kg</span>
+          <span class="item-price">16,500원</span>
+        </div>
+        <div class="item-note">근막 깨끗이 손질, 바로 구울 수 있는 상태</div>
+        <div class="item-row">
+          <span class="item-name">토시살</span>
+          <span class="item-grade">1~2kg</span>
+          <span class="item-price">문의</span>
+        </div>
+        <div class="item-note">예약 순차 출고</div>
+      </div>
+    </div>
+
+    <!-- 육회 외 -->
+    <div class="cat-card" onclick="this.classList.toggle('open')">
+      <div class="cat-header">
+        <div class="cat-icon stew">🍲</div>
+        <div>
+          <div class="cat-name">육회 · 찜 · 전골</div>
+          <div class="cat-sub">1+등급 이상</div>
+        </div>
+      </div>
+      <div class="cat-toggle">상세보기 <span class="arrow">▼</span></div>
+      <div class="cat-items">
+        <div class="item-row">
+          <span class="item-name">우둔 / 도가니살 / 설깃머릿살</span>
+          <span class="item-price">3,800원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">생차돌 (뭉티장 서비스)</span>
+          <span class="item-price">5,800원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">보섭살</span>
+          <span class="item-price">4,000원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">삼각살</span>
+          <span class="item-price">4,500원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">아롱사태</span>
+          <span class="item-price">4,500원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">갈비양지 (빨래판양지)</span>
+          <span class="item-price">4,000원</span>
+        </div>
+        <div class="item-note">반마리분 = 1팩 단위 주문 (0.7~1.2kg) · 양지 중 최고급</div>
+        <div class="item-row">
+          <span class="item-name">알꼬리 (1마리)</span>
+          <span class="item-price">55,000원</span>
+        </div>
+        <div class="item-note">찜 or 구이용 (얇게 썰어요) · 냉장 예약 순차발송 / 냉동 있음</div>
+        <div class="item-row">
+          <span class="item-name">육전 (홍두께)</span>
+          <span class="item-price">4,800원</span>
+        </div>
+        <div class="item-row">
+          <span class="item-name">육적 / 다짐육</span>
+          <span class="item-price">4,000원</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 특선 -->
+    <div class="cat-card" onclick="this.classList.toggle('open')">
+      <div class="cat-header">
+        <div class="cat-icon special">✨</div>
+        <div>
+          <div class="cat-name">특선</div>
+          <div class="cat-sub">당일도축 프리미엄</div>
+        </div>
+      </div>
+      <div class="cat-toggle">상세보기 <span class="arrow">▼</span></div>
+      <div class="cat-items">
+        <div class="item-row">
+          <span class="item-name">당일도축 뭉티기 (뭉티장 서비스)</span>
+          <span class="item-price">9,900원</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 서비스 품목 -->
+    <div class="cat-card" onclick="this.classList.toggle('open')">
+      <div class="cat-header">
+        <div class="cat-icon service">🎁</div>
+        <div>
+          <div class="cat-name">서비스 품목</div>
+          <div class="cat-sub">메인 주문 시 합포장</div>
+        </div>
+      </div>
+      <div class="cat-toggle">상세보기 <span class="arrow">▼</span></div>
+      <div class="cat-items">
+        <div class="item-row">
+          <span class="item-name">세절 국거리</span>
+          <span class="item-price">3,000원</span>
+        </div>
+        <div class="item-note">갈비 작업 짜투리를 수작업으로! 맛없을 수 없는 갈비살 국거리</div>
+        <div class="item-row">
+          <span class="item-name">차돌박이 (구이, 냉동)</span>
+          <span class="item-price">5,500원</span>
+        </div>
+        <div class="item-note">슬라이스 / 트레이 랩포장 / 진공 X</div>
+        <div class="item-row">
+          <span class="item-name">불고기 (목심, 설도)</span>
+          <span class="item-grade">1등급↑</span>
+          <span class="item-price">3,500원</span>
+        </div>
+        <div class="item-note">다른 부위는 문의 주세요 ^^</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SPRING SALE -->
+<div id="spring-sale" class="fade-in">
+  <span class="sale-badge">🌸 봄 한정 세일</span>
+  <h2 class="section-title" style="color: var(--cream);">봄바람 타고 온 한우</h2>
+  <p class="section-desc">입안에서 사르르 '3초구이'부터 쫀득한 '갈비살'까지 — 한정수량!</p>
+
+  <div class="sale-grid">
+    <div class="sale-card">
+      <div class="sale-card-label">3초 구이</div>
+      <div class="sale-card-name">등심 3초구이</div>
+      <div class="sale-card-price">22,500원 <small>/ 300g 1팩</small></div>
+      <div class="sale-card-unit">100g당 7,500원</div>
+      <div class="sale-card-stock">45팩 한정</div>
+      <div class="sale-card-tip">Tip: 센 불에 앞뒤로 살짝!</div>
+    </div>
+    <div class="sale-card">
+      <div class="sale-card-label">3초 구이</div>
+      <div class="sale-card-name">부채살 3초구이</div>
+      <div class="sale-card-price">24,000원 <small>/ 300g 1팩</small></div>
+      <div class="sale-card-unit">100g당 8,000원</div>
+      <div class="sale-card-stock">19팩 한정</div>
+      <div class="sale-card-tip">Tip: 힘줄까지 얇게, 쫀득한 식감!</div>
+    </div>
+    <div class="sale-card">
+      <div class="sale-card-label">암소 1+</div>
+      <div class="sale-card-name">갈비살 (늑간살)</div>
+      <div class="sale-card-price">21,000원 <small>/ 300g 1팩</small></div>
+      <div class="sale-card-unit">100g당 7,000원</div>
+    </div>
+    <div class="sale-card">
+      <div class="sale-card-label">암소 1+</div>
+      <div class="sale-card-name">갈비살 모듬</div>
+      <div class="sale-card-price">29,700원 <small>/ 300g 1팩</small></div>
+      <div class="sale-card-unit">100g당 9,900원 (꽃갈비+늑간)</div>
+    </div>
+    <div class="sale-card">
+      <div class="sale-card-label">암소 1+</div>
+      <div class="sale-card-name">꽃갈비살 / 살치살</div>
+      <div class="sale-card-price">37,500원 <small>/ 300g 1팩</small></div>
+      <div class="sale-card-unit">100g당 12,500원</div>
+    </div>
+    <div class="sale-card">
+      <div class="sale-card-label">한우 1+</div>
+      <div class="sale-card-name">알꼬리 1kg</div>
+      <div class="sale-card-price">44,000원 <small>/ 1kg</small></div>
+      <div class="sale-card-stock">재고 한정</div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER INFO -->
+<section id="order">
+  <div class="fade-in">
+    <p class="section-label">How to Order</p>
+    <h2 class="section-title">주문 안내</h2>
+    <p class="section-desc">주문서 작성 후 주문담당 부방장님께 1:1 톡으로 보내주세요</p>
+  </div>
+
+  <div class="order-form-box fade-in">
+    <h3>📝 주문서 양식</h3>
+    <div class="form-row"><span class="form-label">1. 주문내용</span><span class="form-example">살치 1키로 구이, 꽃갈비 1키로 덩어리</span></div>
+    <div class="form-row"><span class="form-label">2. 닉네임(성함)</span><span class="form-example">꼬리치는무지 (홍길동)</span></div>
+    <div class="form-row"><span class="form-label">3. 연락처</span><span class="form-example">000-0000-0000</span></div>
+    <div class="form-row"><span class="form-label">4. 배송주소</span><span class="form-example">서울시 ○○구 ○○동 (또는 직거래)</span></div>
+    <div class="form-row"><span class="form-label">5. 결제방법</span><span class="form-example">송금 / 제로페이 / 네이버스토어 / 온누리</span></div>
+    <div class="form-row"><span class="form-label">6. 발송일</span><span class="form-example">화요일 or 목요일 출발일 지정</span></div>
+    <div class="form-row"><span class="form-label">7. 전달사항</span><span class="form-example">손질 방법, 특이사항 등</span></div>
+    <a href="https://open.kakao.com/o/swCN0Fih" class="order-cta" target="_blank">💬 카카오톡으로 주문하기</a>
+  </div>
+
+  <div style="margin-top: 2rem;" class="fade-in">
+    <p class="section-label">Packaging</p>
+    <h2 class="section-title" style="font-size: 1.3rem;">포장 선택</h2>
+    <div class="pack-options">
+      <div class="pack-chip">
+        <h4>🥩 덩어리</h4>
+        <p>육즙 손실 및 신선도 유지에 최적. 특히 안심, 채끝은 덩어리 권장!</p>
+      </div>
+      <div class="pack-chip">
+        <h4>🔪 기본 손질</h4>
+        <p>두툼한 구이 2cm 내외. 숯불용으로도 적합.</p>
+      </div>
+      <div class="pack-chip">
+        <h4>🥩 스테이크</h4>
+        <p>3cm 이상 두꺼운 컷.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT & SHIPPING -->
+<section id="payment">
+  <div class="fade-in">
+    <p class="section-label">Payment & Delivery</p>
+    <h2 class="section-title">결제 · 배송</h2>
+  </div>
+
+  <div class="info-cards fade-in">
+    <div class="info-card">
+      <h3>📦 배송 안내</h3>
+      <div class="info-line"><strong>발송일:</strong> 매주 화·목요일 출발</div>
+      <div class="info-line"><strong>도착일:</strong> 수·금요일 도착</div>
+      <div class="info-line"><strong>택배사:</strong> 롯데택배</div>
+      <div class="info-highlight">포장 & 택배비 5,000원 별도<br>직거래 시 포장비 1,000원</div>
+    </div>
+
+    <div class="info-card">
+      <h3>💳 결제 방법</h3>
+      <div class="info-line"><strong>계좌입금:</strong> 기업은행 010-7476-0500 임연옥</div>
+      <div class="info-line"><strong>온라인:</strong> 네이버스토어 (Npay 가능)<br><span style="font-size:0.75rem;color:var(--text-dim)">이용수수료 외 약 4.59% 단가 차액</span></div>
+      <div class="info-line"><strong>제로페이:</strong> QR코드 전달 또는 업체검색 (농할 가능)</div>
+      <div class="info-line"><strong>온누리상품권:</strong> QR코드 결제 가능</div>
+      <div class="info-highlight">현금영수증: 자체발급 불가 → 제로페이 or 온라인결제 이용<br>발송 1일 전 전액입금 시 택배발송</div>
+    </div>
+
+    <div class="info-card">
+      <h3>📍 직거래 안내</h3>
+      <div class="info-line"><strong>육가공장 (HACCP):</strong><br>대구 동구 아양교 인근 (시간 조율 필요)</div>
+      <div class="info-line"><strong>직영판매점:</strong><br>대구 파티마병원 인근<br>09:30 ~ 20:00</div>
+      <div class="info-highlight">직거래는 시간 조율이 필요합니다 ^^</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer fade-in">
+  <div class="footer-brand">아이 참하다 ^^ 참한~ 참한우 ♥</div>
+  <div class="footer-info">
+    사업자등록번호 813-93-00602<br>
+    통신판매신고 23-대구동구-1152호
+  </div>
+  <div class="footer-links">
+    <a href="https://m.smartstore.naver.com/chamhanwoo" class="footer-link" target="_blank">네이버스토어</a>
+    <a href="https://www.ekape.or.kr/kapecp/oneservicemng/oneSrvcMng/combineSearchOne.do?searchKeyword=002139792941" class="footer-link" target="_blank">축산물이력조회</a>
+    <a href="https://open.kakao.com/o/swCN0Fih" class="footer-link" target="_blank">카카오톡 주문</a>
+  </div>
+</footer>
+
+<script>
+// Intersection Observer for fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Active nav tab on scroll
+const sections = document.querySelectorAll('section, #spring-sale');
+const navTabs = document.querySelectorAll('.nav-tab');
+
+// Click handler for nav tabs and hero CTA - pure JS scroll, no anchors
+document.querySelectorAll('[data-target]').forEach(el => {
+  el.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const targetId = el.getAttribute('data-target');
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    return false;
+  });
+});
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 80;
+    if (scrollY >= top) current = section.getAttribute('id');
+  });
+  navTabs.forEach(tab => {
+    tab.classList.remove('active');
+    if (tab.getAttribute('data-target') === current) {
+      tab.classList.add('active');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
